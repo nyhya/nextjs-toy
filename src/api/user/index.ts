@@ -24,7 +24,7 @@ export const getUsesrList = async (page: number, size: number) => {
  * @function userCreate
  * @description 사용자 생성
  */
-export const PostUserCreate = async (param: IUserRequestParam) => {
+export const postUserCreate = async (param: IUserRequestParam) => {
 	try {
 		const res = await instance.post(`/api/users`, {
 			name: param.email,
@@ -47,7 +47,7 @@ export const PostUserCreate = async (param: IUserRequestParam) => {
  * @param Path 사용자 아이디
  * @param name 사용자 이름
  */
-export const PatchUserUpdate = async (id: string, name: string) => {
+export const patchUserUpdate = async (id: string, name: string) => {
 	try {
 		const res = await instance.patch(` /api/users/${id}`, {
 			name: name,
@@ -66,7 +66,7 @@ export const PatchUserUpdate = async (id: string, name: string) => {
  * @description 이메일 중복 체크
  * @param email 이메일
  */
-export const GetDuplicateEmail = async (email: string) => {
+export const getDuplicateEmail = async (email: string) => {
 	try {
 		const res = await instance.get<{ result: boolean }>(
 			`/api/users/${email}/exists`,

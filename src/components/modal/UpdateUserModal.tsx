@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
-import { PatchUserUpdate } from 'api/user';
 import { ModalButtonType } from 'common/designType';
 import SectionLable from 'components/common/Text/SectionLable';
 import { ModalButton } from 'components/ui/Button';
@@ -148,28 +147,29 @@ const UpdateUserBox = styled.div<{ open: boolean | undefined }>`
 	}
 `;
 
-interface IUpdateUserProps {
-	modaltoggle: boolean;
-	setModalToggle: Dispatch<SetStateAction<boolean>>;
-}
-
 interface IFormValue {
 	userUpdateId: string;
 }
 
+interface IUpdateUserProps {
+	modaltoggle: boolean;
+	setModalToggle: Dispatch<SetStateAction<boolean>>;
+	userId: string;
+}
+
 function UpdateUserModal(props: IUpdateUserProps): JSX.Element {
-	const { modaltoggle, setModalToggle } = props;
+	const { modaltoggle, setModalToggle, userId } = props;
 	const [open, setOpen] = useState<boolean>();
 	const methods = useForm<IFormValue>();
 	const { setValue } = methods;
 
-	const { mutate } = useMutation((userParam: { id: string; name: string }) =>
-		PatchUserUpdate(userParam.id, userParam.name),
-	);
+	// const { mutate } = useMutation((userParam: { id: string; name: string }) =>
+	// 	PatchUserUpdate(userParam.id, userParam.name),
+	// );
 
 	const onSumbmitUpdateHandler = data => {
 		console.log(data);
-		mutate(data.userUpdateId);
+		// mutate(data.userUpdateId);
 	};
 
 	useEffect(() => {
@@ -206,7 +206,7 @@ function UpdateUserModal(props: IUpdateUserProps): JSX.Element {
 							</header>
 							<main className="contents">
 								<SectionLable>아이디</SectionLable>
-								<p className="email">user7@hanmail.ai</p>
+								<p className="email">{userId}</p>
 								<InputName
 									label={'이름'}
 									type={'text'}

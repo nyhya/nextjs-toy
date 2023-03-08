@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { campaignList } from 'common/mockUp';
 import Layout from 'components/layout/Layout';
-import ListItem from 'components/table/CustomListItem';
+import ListItem from 'components/table/ListItem';
 import SectionTitle from 'components/table/SectionTitle';
 import Pagelable from 'components/ui/Pagelable';
 import { useState } from 'react';

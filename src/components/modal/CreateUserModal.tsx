@@ -21,7 +21,6 @@ import {
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import Dim from './Dim';
 import { useMutation } from '@tanstack/react-query';
-import { PostUserCreate } from 'api/user';
 import { IUserRequestParam } from 'types/users';
 
 const CreateUserModalBox = styled.div<{ open: boolean | undefined }>`
@@ -195,8 +194,6 @@ function CreateUserModal(props: ICreateUserModalProps): JSX.Element {
 	}, [setModalToggle, setOpen]);
 
 	const onSumbmitCreateHandler = data => {
-		console.log(data);
-
 		const users: IUserRequestParam = {
 			name: data.name,
 			email: data.email,

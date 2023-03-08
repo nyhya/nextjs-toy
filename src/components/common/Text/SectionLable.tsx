@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AppLayoutProps } from '../../../types/commonType';
+import { AppLayoutProps } from 'types/commonType';
 
 const SectionLableBox = styled.p`
 	width: 100%;

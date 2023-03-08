@@ -3,7 +3,6 @@ import { routerPath, userAuthList } from 'common/options';
 import DropDownMenu from 'components/ui/DropDownMenu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { RootState, userSelector } from 'store';
 import { userStateAction } from 'store/state';

@@ -1,7 +1,5 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Header from 'components/common/header/Header';
-import { useEffect } from 'react';
 import { AppLayoutProps } from '../../types/commonType';
 
 const LayoutBox = styled.section`

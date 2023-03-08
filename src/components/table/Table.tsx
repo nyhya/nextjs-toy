@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { TextFormatType } from 'common/designType';
 import dayjs from 'dayjs';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { IUser } from 'types/users';
 
 const TableBox = styled.div``;
 
@@ -53,27 +54,41 @@ const StyledTable = styled.table`
 interface ITableItem {
 	header: string;
 	id?: string;
-	element?: React.ReactNode;
+	element?: React.FC<IGrideCell<any>>;
 	textFormat?: TextFormatType;
 }
 
-interface ITable {
+interface ITable<T> {
 	itemSetting: Array<ITableItem>;
-	data: Array<any>;
+	data: Array<T>;
 }
 
 const CellBox = styled.td``;
 
-interface ICell {
+export interface IGridPosition {
+	col: number;
+	row: number;
+}
+
+export interface IGrideCell<T> {
+	position: IGridPosition;
+	data: T;
+	change: (position: IGridPosition, value?: T) => void;
+}
+
+interface ICell<T> {
 	row: number;
 	col: number;
 	text?: string;
 	textFormat?: TextFormatType;
-	element?: React.ReactNode;
+	element?: React.FC<IGrideCell<T>>;
+	rowData: T;
+	onChangeValue: (position: IGridPosition, value?: any) => void;
 }
 
-function Cell(props: ICell): JSX.Element {
-	const { row, col, text, textFormat, element } = props;
+function Cell<T>(props: ICell<T>): JSX.Element {
+	const { row, col, text, textFormat, rowData, element, onChangeValue } = props;
+	const Component = element;
 
 	const renderingCell = () => {
 		switch (textFormat) {
@@ -84,16 +99,35 @@ function Cell(props: ICell): JSX.Element {
 					</CellBox>
 				);
 			default:
-				return <CellBox>{element ? <>{element}</> : <>{text}</>}</CellBox>;
+				return (
+					<CellBox>
+						{Component ? (
+							<>
+								{
+									<Component
+										data={rowData}
+										position={{ col: col, row: row }}
+										change={onChangeValue}
+									></Component>
+								}
+							</>
+						) : (
+							<>{text}</>
+						)}
+					</CellBox>
+				);
 		}
 	};
 
 	return <>{renderingCell()}</>;
 }
 
-function Table(props: ITable): JSX.Element {
+function Table<T>(props: ITable<T>): JSX.Element {
 	const { itemSetting, data } = props;
 
+	const onChangeTableCellValue = (position: IGridPosition, value?: any) => {
+		console.log(position, value);
+	};
 	return (
 		<TableBox>
 			<TableWrapper>
@@ -115,13 +149,15 @@ function Table(props: ITable): JSX.Element {
 								<tr key={rowIdx}>
 									{itemSetting.map((cellItem, colIdx) => {
 										return (
-											<Cell
+											<Cell<T>
 												key={colIdx}
 												row={rowIdx}
 												col={colIdx}
-												text={cellItem.id ? rowItem[cellItem.id] : undefined}
+												rowData={rowItem}
+												text={cellItem.id && rowItem[cellItem.id]}
 												element={cellItem.element}
 												textFormat={cellItem.textFormat}
+												onChangeValue={onChangeTableCellValue}
 											/>
 										);
 									})}

@@ -8,10 +8,11 @@ import CreateUserModal from 'components/modal/CreateUserModal';
 import ErrorModal from 'components/modal/ErrorModal';
 import UpdateUserModal from 'components/modal/UpdateUserModal';
 import SectionTitle from 'components/table/SectionTitle';
-import Table from 'components/table/Table';
+import Table, { IGrideCell } from 'components/table/Table';
 import Pagelable from 'components/ui/Pagelable';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { IUser } from 'types/users';
 
 const ManagerBox = styled.div`
 	/* min-height: 700px; */
@@ -55,7 +56,7 @@ const setting = [
 	{
 		header: '수정 ',
 		id: undefined,
-		element: <UserUpdate />,
+		element: UserUpdate,
 	},
 ];
 
@@ -70,14 +71,23 @@ const UserUpdateBox = styled.div`
  * @component UserUpdate
  * @description 수정버튼 컴포넌트
  */
-function UserUpdate(): JSX.Element {
+function UserUpdate<T extends IUser>(props: IGrideCell<T>): JSX.Element {
+	const { position, change, data } = props;
 	const [mordalOpen, setModalOpen] = useState(false);
+
 	const onClickUserUpdate = () => {
+		console.log(position);
+		console.log(data);
+
 		setModalOpen(true);
 	};
 	return (
 		<UserUpdateBox>
-			<UpdateUserModal modaltoggle={mordalOpen} setModalToggle={setModalOpen} />
+			<UpdateUserModal
+				modaltoggle={mordalOpen}
+				setModalToggle={setModalOpen}
+				userId={data.email}
+			/>
 			<p className="text-btn" onClick={onClickUserUpdate}>
 				수정
 			</p>
@@ -148,7 +158,7 @@ function userManager(): JSX.Element {
 				>
 					에러모달보기
 				</button> */}
-				<Table itemSetting={setting} data={usersList.content} />
+				<Table<IUser> itemSetting={setting} data={usersList.content} />
 				<Pagelable
 					limit={10}
 					selectPage={params.page}
