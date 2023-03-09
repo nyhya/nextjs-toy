@@ -1,6 +1,6 @@
 # nextjs-toy
 
-React, Next, typescript 사용
+React, Next, typescript, React-Query, Redux-toolkit 사용
 
 <페이지 구성>
 
