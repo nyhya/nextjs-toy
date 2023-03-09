@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { RootState, userSelector } from 'store';
-import { userStateAction } from 'store/state';
+import { userStateAction } from 'store/state/user';
 import { ISelectType } from 'types/commonType';
 import UserInfo from './UserInfo';
 

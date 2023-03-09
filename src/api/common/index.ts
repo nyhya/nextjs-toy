@@ -10,7 +10,8 @@ export const isLoginUser = async () => {
 		if (res) {
 			return res;
 		}
-	} catch (error) {
-		console.log('isLoginUser error');
+	} catch (errorStatusCode) {
+		// if(errorStatusCode){
+		// }
 	}
 };

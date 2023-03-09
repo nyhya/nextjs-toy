@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Header from 'components/common/header/Header';
+import ErrorModal from 'components/modal/ErrorModal';
 import { AppLayoutProps } from '../../types/commonType';
 
 const LayoutBox = styled.section`

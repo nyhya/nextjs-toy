@@ -9,6 +9,10 @@ import {
 	useEffect,
 	useState,
 } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { errorModalStateAction } from 'store/state/errorModal';
 import Dim from './Dim';
 
 const ErrorModalBox = styled.div<{ open: boolean | undefined }>`
@@ -156,7 +160,11 @@ interface IErrorModalProps {
 }
 function ErrorModal(props: IErrorModalProps): JSX.Element {
 	const { modaltoggle, setModalToggle } = props;
+	// const { modaltoggle } = useSelector(
+	// 	(state: RootState) => state.errorModalState,
+	// );
 	const [open, setOpen] = useState<boolean>();
+	// const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (modaltoggle) {
@@ -168,8 +176,9 @@ function ErrorModal(props: IErrorModalProps): JSX.Element {
 		setOpen(false);
 		setTimeout(() => {
 			setModalToggle(false);
+			// dispatch(errorModalStateAction.rdxOpenModalToggle(false));
 		}, 1000);
-	}, [setModalToggle, setOpen]);
+	}, [setOpen]);
 	return (
 		<>
 			{open && <Dim open={open} />}

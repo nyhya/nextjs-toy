@@ -12,7 +12,7 @@ interface IUserState {
 }
 
 const userState = createSlice({
-	name: 'pharmacy',
+	name: 'userAuth',
 	initialState: {
 		userAuth: {
 			idx: 1,

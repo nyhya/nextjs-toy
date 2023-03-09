@@ -6,10 +6,12 @@ import {
 	useSelector as useReduxSelector,
 } from 'react-redux';
 import { Action, combineReducers } from 'redux';
-import userState from './state';
+import errorModalState from './state/errorModal';
+import userState from './state/user';
 
 const rootReducer = combineReducers({
 	userState: userState.reducer,
+	errorModalState: errorModalState.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

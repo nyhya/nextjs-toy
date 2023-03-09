@@ -138,10 +138,6 @@ function userManager(): JSX.Element {
 	return (
 		<Layout>
 			<CreateUserModal modaltoggle={open} setModalToggle={setOpen} />
-			<ErrorModal
-				modaltoggle={errorModalOpen}
-				setModalToggle={setErrorModalOpen}
-			/>
 			<ManagerBox>
 				<SectionTitle>사용자 관리</SectionTitle>
 				<button

@@ -2,7 +2,6 @@ import { instance } from 'api';
 import { IUserRes } from 'types/users';
 
 /**
- * @function campaignList
  * @description 캠페인 리스트 조회
  */
 export const getCampaignList = async (page: number, size: number) => {
@@ -17,7 +16,8 @@ export const getCampaignList = async (page: number, size: number) => {
 			return res;
 		}
 	} catch (error) {
-		console.log('campaignList error');
+		// console.log('getCampaignList', error);
+		return error;
 	}
 };
 
