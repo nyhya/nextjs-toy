@@ -55,6 +55,7 @@ const StyledTable = styled.table`
 
 function CampaignTable(): JSX.Element {
 	const [params, setParams] = useState({ page: 1, size: 25 });
+
 	// const { reset } = useQueryErrorResetBoundary();
 	// const dispatch = useDispatch();
 	const { data, status, isError, error } = useQuery(

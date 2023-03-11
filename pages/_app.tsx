@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
 			// 	alert(`Something went wrong: ${error}`);
 			// }
 			// setErrorModalToggle(true);
-			console.log('app onError', error);
+			// console.log('app onError', error);
 		},
 	}),
 	defaultOptions: {
@@ -46,8 +46,6 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const [errorModalToggle, setErrorModalToggle] = useState(false);
-
 	useEffect(() => {
 		console.log('queryClient');
 	}, [queryClient]);
@@ -57,10 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Hydrate state={pageProps.dehydratedState}>
 				<ThemeProvider theme={globalTheme}>
 					<GlobalStyle />
-					<ErrorModal
-						modaltoggle={errorModalToggle}
-						setModalToggle={setErrorModalToggle}
-					/>
+
 					<Component {...pageProps} />
 				</ThemeProvider>
 			</Hydrate>
