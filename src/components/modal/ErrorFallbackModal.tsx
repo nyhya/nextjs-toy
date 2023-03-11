@@ -179,6 +179,12 @@ function ErrorFallbackModal({ error, resetErrorBoundary }): JSX.Element {
 		setOpen(true);
 	}, []);
 
+	const onClickModalClose = useCallback(() => {
+		setTimeout(() => {
+			setOpen(false);
+		}, 100);
+	}, [setOpen]);
+
 	return (
 		<>
 			{open && <Dim open={open} />}
@@ -204,18 +210,18 @@ function ErrorFallbackModal({ error, resetErrorBoundary }): JSX.Element {
 							<ModalButton
 								type="button"
 								className="btn-cancle"
+								btnType={ModalButtonType.CANCLE}
+								onClick={onClickModalClose}
+							>
+								취소
+							</ModalButton>
+							<ModalButton
+								type="button"
 								btnType={ModalButtonType.ACTIVE}
 								onClick={() => resetErrorBoundary()}
 							>
 								다시시도
 							</ModalButton>
-							{/* <ModalButton
-								type="button"
-								btnType={ModalButtonType.ACTIVE}
-								onClick={onClickModalClose}
-							>
-								확인
-							</ModalButton> */}
 						</div>
 					</footer>
 				</section>
