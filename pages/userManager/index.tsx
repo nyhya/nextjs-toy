@@ -147,13 +147,7 @@ function userManager(): JSX.Element {
 				>
 					생성
 				</button>
-				{/* <button
-					type="button"
-					className="temp-error"
-					onClick={onClickErrorModalOpen}
-				>
-					에러모달보기
-				</button> */}
+
 				<Table<IUser> itemSetting={setting} data={usersList.content} />
 				<Pagelable
 					limit={10}

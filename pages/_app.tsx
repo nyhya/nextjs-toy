@@ -20,34 +20,33 @@ export const queryErrorHandler = error => {
 	// toast(`데이터를 가져오지 못했습니다! ${error.message}`);
 };
 
-// const dispatch = useDispatch();
+const queryClient = new QueryClient({
+	queryCache: new QueryCache({
+		onError: (error, query) => {
+			// console.log('queryClient', error);
+			// dispatch(errorModalStateAction.rdxOpenModalToggle(true));
+			// if (query.state.data !== undefined) {
+			// 	// toast.error(`Something went wrong: ${error.message}`)
+			// 	alert(`Something went wrong: ${error}`);
+			// }
+			// setErrorModalToggle(true);
+			console.log('app onError', error);
+		},
+	}),
+	defaultOptions: {
+		queries: {
+			// suspense: true,
+			retry: 0,
+			// useErrorBoundary: true,
+		},
+		mutations: {
+			// useErrorBoundary: true,
+		},
+	},
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [errorModalToggle, setErrorModalToggle] = useState(false);
-
-	const queryClient = new QueryClient({
-		queryCache: new QueryCache({
-			onError: (error, query) => {
-				// console.log('queryClient', error);
-				// dispatch(errorModalStateAction.rdxOpenModalToggle(true));
-				// if (query.state.data !== undefined) {
-				// 	// toast.error(`Something went wrong: ${error.message}`)
-				// 	alert(`Something went wrong: ${error}`);
-				// }
-				setErrorModalToggle(true);
-			},
-		}),
-		defaultOptions: {
-			queries: {
-				// suspense: true,
-				retry: 0,
-				// useErrorBoundary: true,
-			},
-			mutations: {
-				// useErrorBoundary: true,
-			},
-		},
-	});
 
 	useEffect(() => {
 		console.log('queryClient');

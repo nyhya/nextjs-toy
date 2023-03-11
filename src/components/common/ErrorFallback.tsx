@@ -17,15 +17,9 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 	// };
 
 	return (
-		<div className="error-fallback-wrapper">
-			에러 났어요
-			{/* <div className="inner">
-				<h2 className="title">{title}</h2>
-				<p className="content">{content}</p>
-				<button type="button" onClick={onClickHandler}>
-					{buttonMessage}
-				</button>
-			</div> */}
+		<div>
+			<p> ErrorBoundary FallbackComponent 에러: {error.message} </p>
+			<button onClick={() => resetErrorBoundary()}> 다시 시도 </button>
 		</div>
 	);
 }

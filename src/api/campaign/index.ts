@@ -4,6 +4,17 @@ import { IUserRes } from 'types/users';
 /**
  * @description 캠페인 리스트 조회
  */
+// export const getCampaignList = async (page: number, size: number) => {
+// 	const res = await instance.get<IUserRes>('/api/campaigns', {
+// 		params: {
+// 			page: page,
+// 			size: size,
+// 		},
+// 	});
+// 	if (res) {
+// 		return res;
+// 	}
+// };
 export const getCampaignList = async (page: number, size: number) => {
 	try {
 		const res = await instance.get<IUserRes>('/api/campaigns', {
@@ -16,7 +27,7 @@ export const getCampaignList = async (page: number, size: number) => {
 			return res;
 		}
 	} catch (error) {
-		// console.log('getCampaignList', error);
+		console.error('getCampaignList', error);
 		return error;
 	}
 };

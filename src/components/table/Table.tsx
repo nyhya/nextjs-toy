@@ -51,18 +51,6 @@ const StyledTable = styled.table`
 	}
 `;
 
-interface ITableItem {
-	header: string;
-	id?: string;
-	element?: React.FC<IGrideCell<any>>;
-	textFormat?: TextFormatType;
-}
-
-interface ITable<T> {
-	itemSetting: Array<ITableItem>;
-	data: Array<T>;
-}
-
 const CellBox = styled.td``;
 
 export interface IGridPosition {
@@ -120,6 +108,18 @@ function Cell<T>(props: ICell<T>): JSX.Element {
 	};
 
 	return <>{renderingCell()}</>;
+}
+
+interface ITableItem {
+	header: string;
+	id?: string;
+	element?: React.FC<IGrideCell<any>>;
+	textFormat?: TextFormatType;
+}
+
+interface ITable<T> {
+	itemSetting: Array<ITableItem>;
+	data: Array<T>;
 }
 
 function Table<T>(props: ITable<T>): JSX.Element {

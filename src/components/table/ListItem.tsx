@@ -25,7 +25,7 @@ interface ICampaignItemProps {
 	vtr: number; // VTR
 }
 
-function CustomListItem(props: ICampaignItemProps): JSX.Element {
+function ListItem(props: ICampaignItemProps): JSX.Element {
 	const {
 		name,
 		campaign_objective,
@@ -73,4 +73,4 @@ function CustomListItem(props: ICampaignItemProps): JSX.Element {
 	);
 }
 
-export default CustomListItem;
+export default ListItem;
