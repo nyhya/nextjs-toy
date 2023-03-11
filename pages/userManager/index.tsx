@@ -5,7 +5,7 @@ import { TextFormatType } from 'common/designType';
 import { campaignList, usersList } from 'common/mockUp';
 import Layout from 'components/layout/Layout';
 import CreateUserModal from 'components/modal/CreateUserModal';
-import ErrorModal from 'components/modal/ErrorModal';
+import ErrorModal from 'components/modal/ErrorFallbackModal';
 import UpdateUserModal from 'components/modal/UpdateUserModal';
 import SectionTitle from 'components/table/SectionTitle';
 import Table, { IGrideCell } from 'components/table/Table';

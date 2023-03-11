@@ -11,7 +11,8 @@ import { campaignList } from 'common/mockUp';
 import CampaignTable from 'components/campaign/Table';
 import ErrorFallback from 'components/common/ErrorFallback';
 import Layout from 'components/layout/Layout';
-import ErrorModal from 'components/modal/ErrorModal';
+import ErrorFallbackModal from 'components/modal/ErrorFallbackModal';
+import ErrorModal from 'components/modal/ErrorFallbackModal';
 
 import SectionTitle from 'components/table/SectionTitle';
 import Pagelable from 'components/ui/Pagelable';
@@ -50,14 +51,13 @@ function campaign(): JSX.Element {
 
 	return (
 		<Layout>
-			<ErrorModal
-				modaltoggle={errorModalToggle}
-				setModalToggle={setErrorModalToggle}
-			/>
 			<CampaignBox>
 				<SectionTitle>캠페인 관리</SectionTitle>
 			</CampaignBox>
-			<ErrorBoundary FallbackComponent={ErrorFallback} onError={handleOnError}>
+			<ErrorBoundary
+				FallbackComponent={ErrorFallbackModal}
+				onError={handleOnError}
+			>
 				<Suspense fallback={<InfoLoading />}>
 					<CampaignTable />
 				</Suspense>

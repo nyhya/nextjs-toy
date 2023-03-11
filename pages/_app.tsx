@@ -5,7 +5,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query';
-import ErrorModal from 'components/modal/ErrorModal';
+import ErrorModal from 'components/modal/ErrorFallbackModal';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';

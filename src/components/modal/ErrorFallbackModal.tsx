@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ModalButtonType } from 'common/designType';
+import { getErrorMessage } from 'common/utils/handleException';
 import { ModalButton } from 'components/ui/Button';
 import {
 	Dispatch,
@@ -154,31 +155,30 @@ const ErrorModalBox = styled.div<{ open: boolean | undefined }>`
 	}
 `;
 
-interface IErrorModalProps {
-	modaltoggle: boolean;
-	setModalToggle: Dispatch<SetStateAction<boolean>>;
-}
-function ErrorModal(props: IErrorModalProps): JSX.Element {
-	const { modaltoggle, setModalToggle } = props;
-	// const { modaltoggle } = useSelector(
-	// 	(state: RootState) => state.errorModalState,
+function ErrorFallbackModal({ error, resetErrorBoundary }): JSX.Element {
+	const { status } = error.response;
+	const { title, content } = getErrorMessage(status);
+	// const isNotAuthorized = status === 401 || status === 403;
+	// const buttonMessage = isNotAuthorized ? '로그인' : '새로고침';
+
+	// const onClickHandler = () => {
+	// 	if (isNotAuthorized) {
+	// 		console.log(isNotAuthorized);
+
+	// 		// navigate('/login');
+	// 	} else {
+	// 		resetErrorBoundary();
+	// 	}
+	// };
+
 	// );
 	const [open, setOpen] = useState<boolean>();
 	// const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (modaltoggle) {
-			setOpen(true);
-		}
-	}, [modaltoggle]);
+		setOpen(true);
+	}, []);
 
-	const onClickModalClose = useCallback(() => {
-		setOpen(false);
-		setTimeout(() => {
-			setModalToggle(false);
-			// dispatch(errorModalStateAction.rdxOpenModalToggle(false));
-		}, 1000);
-	}, [setOpen]);
 	return (
 		<>
 			{open && <Dim open={open} />}
@@ -187,8 +187,13 @@ function ErrorModal(props: IErrorModalProps): JSX.Element {
 					<header></header>
 					<main className="contents">
 						<p>
-							<b>에러가 발생했습니다.</b> <br />
-							같은 현상이 반복되면 고객센터로 문의 드립니다.
+							<b>{title}</b>
+							<br />
+							{content}
+
+							<span style={{ color: '#F00', fontSize: '13px' }}>
+								(에러코드 {status})
+							</span>
 						</p>
 						<p>
 							<b>고객센터</b> <br />- Email : help@hanmail.ai
@@ -198,11 +203,19 @@ function ErrorModal(props: IErrorModalProps): JSX.Element {
 						<div className="btn-box">
 							<ModalButton
 								type="button"
+								className="btn-cancle"
+								btnType={ModalButtonType.ACTIVE}
+								onClick={() => resetErrorBoundary()}
+							>
+								다시시도
+							</ModalButton>
+							{/* <ModalButton
+								type="button"
 								btnType={ModalButtonType.ACTIVE}
 								onClick={onClickModalClose}
 							>
 								확인
-							</ModalButton>
+							</ModalButton> */}
 						</div>
 					</footer>
 				</section>
@@ -211,4 +224,4 @@ function ErrorModal(props: IErrorModalProps): JSX.Element {
 	);
 }
 
-export default ErrorModal;
+export default ErrorFallbackModal;
